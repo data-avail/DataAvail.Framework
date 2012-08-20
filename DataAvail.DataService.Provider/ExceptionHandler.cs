@@ -9,6 +9,7 @@ namespace DataAvail.DataService.Provider
 {
     public static class ExceptionHandler
     {
+        //
         public static void HandleException(HandleExceptionArgs args)
         {
             if (args.Exception.GetType() == typeof(DbEntityValidationException))
