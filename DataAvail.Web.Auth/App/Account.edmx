@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DataAvail.DataHub.AccountsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DataAvailDataHubAccountsModelStoreContainer">
+          <EntitySet Name="UserApplications" EntityType="DataAvail.DataHub.AccountsModel.Store.UserApplications" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="DataAvail.DataHub.AccountsModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Users_UserApplications" Association="DataAvail.DataHub.AccountsModel.Store.FK_Users_UserApplications">
+            <End Role="UserApplications" EntitySet="UserApplications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="UserApplications">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Name" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="Created" Type="datetime" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="UserAppId" Type="int" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Users_UserApplications">
+          <End Role="UserApplications" Type="DataAvail.DataHub.AccountsModel.Store.UserApplications" Multiplicity="0..1" />
+          <End Role="Users" Type="DataAvail.DataHub.AccountsModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApplications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserAppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataAvail.DataHub.AccountsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="AccountEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="UserApplications" EntityType="DataAvail.DataHub.AccountsModel.UserApplication" />
+          <EntitySet Name="Users" EntityType="DataAvail.DataHub.AccountsModel.User" />
+          <AssociationSet Name="FK_Users_UserApplications" Association="DataAvail.DataHub.AccountsModel.FK_Users_UserApplications">
+            <End Role="UserApplications" EntitySet="UserApplications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="UserApplication">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="Created" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <NavigationProperty Name="Users" Relationship="DataAvail.DataHub.AccountsModel.FK_Users_UserApplications" FromRole="UserApplications" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="Guid" Nullable="false" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
+          <Property Name="IsAnonymous" Type="Boolean" Nullable="false" />
+          <Property Name="UserAppId" Type="Int32" />
+          <Property Name="LastActivityDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="UserApplication" Relationship="DataAvail.DataHub.AccountsModel.FK_Users_UserApplications" FromRole="Users" ToRole="UserApplications" />
+        </EntityType>
+        <Association Name="FK_Users_UserApplications">
+          <End Role="UserApplications" Type="DataAvail.DataHub.AccountsModel.UserApplication" Multiplicity="0..1" />
+          <End Role="Users" Type="DataAvail.DataHub.AccountsModel.User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserApplications">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="UserAppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataAvailDataHubAccountsModelStoreContainer" CdmEntityContainer="AccountEntities">
+          <EntitySetMapping Name="UserApplications"><EntityTypeMapping TypeName="DataAvail.DataHub.AccountsModel.UserApplication"><MappingFragment StoreEntitySet="UserApplications">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Name" ColumnName="Name" />
+            <ScalarProperty Name="Created" ColumnName="Created" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Users"><EntityTypeMapping TypeName="DataAvail.DataHub.AccountsModel.User"><MappingFragment StoreEntitySet="Users">
+            <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+            <ScalarProperty Name="UserId" ColumnName="UserId" />
+            <ScalarProperty Name="UserName" ColumnName="UserName" />
+            <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+            <ScalarProperty Name="UserAppId" ColumnName="UserAppId" />
+            <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Account">
+        <EntityTypeShape EntityType="DataAvail.DataHub.AccountsModel.UserApplication" Width="1.5" PointX="0.75" PointY="1.25" Height="1.7879850260416668" IsExpanded="true" />
+        <EntityTypeShape EntityType="DataAvail.DataHub.AccountsModel.User" Width="1.5" PointX="3" PointY="1" Height="2.3648893229166674" IsExpanded="true" />
+        <AssociationConnector Association="DataAvail.DataHub.AccountsModel.FK_Users_UserApplications" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="2.1439925130208333" />
+          <ConnectorPoint PointX="3" PointY="2.1439925130208333" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

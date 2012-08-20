@@ -1,0 +1,252 @@
+﻿<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DataAvail.UralAppModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:devart="http://devart.com/schemas/edml/StorageSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="DataEntitiesStoreContainer">
+          <EntitySet Name="Products" EntityType="DataAvail.UralAppModel.Store.Products" store:Type="Tables" Schema="dbo" Table="Products" />
+          <EntitySet Name="Tags" EntityType="DataAvail.UralAppModel.Store.Tags" store:Type="Tables" Schema="dbo" Table="Tags" />
+          <EntitySet Name="ProductTagMaps" EntityType="DataAvail.UralAppModel.Store.ProductTagMaps" store:Type="Tables" Schema="dbo" Table="ProductTagMaps" />
+          <EntitySet Name="Producers" EntityType="DataAvail.UralAppModel.Store.Producers" store:Type="Tables" Schema="dbo" Table="Producers" />
+          <AssociationSet Name="FK_ProductTagMaps_Products" Association="DataAvail.UralAppModel.Store.FK_ProductTagMaps_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductTagMaps" EntitySet="ProductTagMaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ProductTagMaps_Tags" Association="DataAvail.UralAppModel.Store.FK_ProductTagMaps_Tags">
+            <End Role="Tags" EntitySet="Tags" />
+            <End Role="ProductTagMaps" EntitySet="ProductTagMaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Producers" Association="DataAvail.UralAppModel.Store.FK_Products_Producers">
+            <End Role="Producers" EntitySet="Producers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar(max)" Nullable="false" />
+          <Property Name="ProducerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Tags">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ProductTagMaps">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="TagId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Producers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ProductTagMaps_Products">
+          <End Role="Products" Type="DataAvail.UralAppModel.Store.Products" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductTagMaps" Type="DataAvail.UralAppModel.Store.ProductTagMaps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTagMaps">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ProductTagMaps_Tags">
+          <End Role="Tags" Type="DataAvail.UralAppModel.Store.Tags" Multiplicity="1" />
+          <End Role="ProductTagMaps" Type="DataAvail.UralAppModel.Store.ProductTagMaps" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tags">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTagMaps">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Producers">
+          <End Role="Producers" Type="DataAvail.UralAppModel.Store.Producers" Multiplicity="0..1" />
+          <End Role="Products" Type="DataAvail.UralAppModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DataAvail.UralAppModel" Alias="Self" d4p1:ViewGeneration="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:devart="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns:ed="http://devart.com/schemas/EntityDeveloper/1.0" xmlns:d4p1="http://devart.com/schemas/edml/ConceptualSchemaExtensions/1.0" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="Model" annotation:LazyLoadingEnabled="true" ed:Guid="cd00da7c-fd55-471a-bc38-a4a44c10497e">
+          <EntitySet Name="Products" EntityType="DataAvail.UralAppModel.Product" />
+          <EntitySet Name="Tags" EntityType="DataAvail.UralAppModel.Tag" />
+          <EntitySet Name="ProductTagMaps" EntityType="DataAvail.UralAppModel.ProductTagMap" />
+          <EntitySet Name="Producers" EntityType="DataAvail.UralAppModel.Producer" />
+          <AssociationSet Name="Product_ProductTagMapSet" Association="DataAvail.UralAppModel.Product_ProductTagMap">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="ProductTagMaps" EntitySet="ProductTagMaps" />
+          </AssociationSet>
+          <AssociationSet Name="Tag_ProductTagMapSet" Association="DataAvail.UralAppModel.Tag_ProductTagMap">
+            <End Role="Tag" EntitySet="Tags" />
+            <End Role="ProductTagMaps" EntitySet="ProductTagMaps" />
+          </AssociationSet>
+          <AssociationSet Name="Producer_ProductSet" Association="DataAvail.UralAppModel.Producer_Product">
+            <End Role="Producer" EntitySet="Producers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Product" ed:Guid="422e95fc-ee78-407e-8c75-da2802fe076c">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:Guid="4a01fc34-8e08-46de-98fa-fadaf45f4b34" />
+          <Property Name="Name" Type="String" Nullable="false" ed:Guid="8e888dd4-585d-4092-9b16-1cf2f839d49f" />
+          <Property Name="ProducerId" Type="Int32" ed:Guid="7a328c54-02de-4212-a1e0-6a3cacd89b18" />
+          <NavigationProperty Name="ProductTagMaps" Relationship="DataAvail.UralAppModel.Product_ProductTagMap" FromRole="Product" ToRole="ProductTagMaps" ed:Guid="82030d2c-f70b-4d05-9d54-f93e9b40b466" />
+          <NavigationProperty Name="Producer" Relationship="DataAvail.UralAppModel.Producer_Product" FromRole="Products" ToRole="Producer" ed:Guid="abb5ee12-5772-462c-b882-96dd4a3cb409" />
+        </EntityType>
+        <EntityType Name="Tag" ed:Guid="b84ddb09-b0bb-47d3-8be8-4cdb9fc51ad1">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:Guid="593f3c58-0618-45b5-891a-4ce44dbc7980" />
+          <Property Name="Name" Type="String" Nullable="false" ed:Guid="ad4af098-84ac-4d8c-8379-4dc025123b1b" />
+          <NavigationProperty Name="ProductTagMaps" Relationship="DataAvail.UralAppModel.Tag_ProductTagMap" FromRole="Tag" ToRole="ProductTagMaps" ed:Guid="380a4778-81e9-4439-ad1e-0a6d5454b0f0" />
+        </EntityType>
+        <EntityType Name="ProductTagMap" ed:Guid="68773408-70ed-4176-a0dd-0878a94515d0">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:Guid="e2edac1b-25cb-4f29-9407-8c62edacf1df" />
+          <Property Name="ProductId" Type="Int32" Nullable="false" ed:Guid="10918502-0c38-4ff4-a181-8a865da6584c" />
+          <Property Name="TagId" Type="Int32" Nullable="false" ed:Guid="cada8ba7-310c-4b9c-9be9-6c7d3b9082b1" />
+          <NavigationProperty Name="Product" Relationship="DataAvail.UralAppModel.Product_ProductTagMap" FromRole="ProductTagMaps" ToRole="Product" ed:Guid="5ca77b9b-b6f6-4cb6-b92e-687c5dcf6910" />
+          <NavigationProperty Name="Tag" Relationship="DataAvail.UralAppModel.Tag_ProductTagMap" FromRole="ProductTagMaps" ToRole="Tag" ed:Guid="bb36c4e2-2db5-4b21-a36f-e846f45947ef" />
+        </EntityType>
+        <EntityType Name="Producer" ed:Guid="777dbd52-ab3e-4515-9a1d-53159f9d66af">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" ed:Guid="93facfce-ed94-423b-8034-966253cef4b8" />
+          <Property Name="Name" Type="String" Nullable="false" ed:Guid="87eefeb3-03f0-4ce6-a2b8-a7d9aeebd652" />
+          <NavigationProperty Name="Products" Relationship="DataAvail.UralAppModel.Producer_Product" FromRole="Producer" ToRole="Products" ed:Guid="26634e92-08ec-4437-bce9-69d95e65b1aa" />
+        </EntityType>
+        <Association Name="Product_ProductTagMap" ed:Guid="310a588c-339a-4fe2-98be-7593f7192ddc">
+          <End Role="Product" Type="DataAvail.UralAppModel.Product" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ProductTagMaps" Type="DataAvail.UralAppModel.ProductTagMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTagMaps">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Tag_ProductTagMap" ed:Guid="314027fd-03b1-4f74-a3ff-b912be4a4162">
+          <End Role="Tag" Type="DataAvail.UralAppModel.Tag" Multiplicity="1" />
+          <End Role="ProductTagMaps" Type="DataAvail.UralAppModel.ProductTagMap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tag">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ProductTagMaps">
+              <PropertyRef Name="TagId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Producer_Product" ed:Guid="44c9105d-922b-4138-a450-d10ddb3f0242">
+          <End Role="Producer" Type="DataAvail.UralAppModel.Producer" Multiplicity="0..1" />
+          <End Role="Products" Type="DataAvail.UralAppModel.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Producer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="ProducerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- MSL content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DataEntitiesStoreContainer" CdmEntityContainer="Model">
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="DataAvail.UralAppModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProducerId" ColumnName="ProducerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tags">
+            <EntityTypeMapping TypeName="DataAvail.UralAppModel.Tag">
+              <MappingFragment StoreEntitySet="Tags">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProductTagMaps">
+            <EntityTypeMapping TypeName="DataAvail.UralAppModel.ProductTagMap">
+              <MappingFragment StoreEntitySet="ProductTagMaps">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="TagId" ColumnName="TagId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Producers">
+            <EntityTypeMapping TypeName="DataAvail.UralAppModel.Producer">
+              <MappingFragment StoreEntitySet="Producers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <edmx:Diagrams>
+      <Diagram Name="Main" />
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
