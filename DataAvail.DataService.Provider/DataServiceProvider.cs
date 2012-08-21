@@ -108,24 +108,25 @@ namespace DataAvail.DataService.Provider
 
             NotifyItemChangedData? notifyData = null;
 
+
             if (IContext != null)
             {
                 IContext.BeginTransaction();
 
                 try
                 {
-                    base.SaveChanges();
-
                     var rootSaveContext = this.GetRootSaveContext();
 
+                    base.SaveChanges();
+                    
                     typeName = rootSaveContext.Value.GetType().Name;
-
-                    notifyData = GetNotifyData(rootSaveContext.Value);
 
                     if (rootSaveContext.Key is IRepositoryValidate)
                     {
                         ((IRepositoryValidate)rootSaveContext.Key).ValidateUpdate(rootSaveContext.Value);
                     }
+
+                    notifyData = GetNotifyData(rootSaveContext.Value);
                 }
                 catch (System.Exception e)
                 {

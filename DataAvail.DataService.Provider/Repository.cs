@@ -25,10 +25,17 @@ namespace DataAvail.DataService.Provider
 
         protected ObjectContext Context { get; private set; }
 
+        #region IRepository
+
         public void SetContext(object Context)
         {
             this.Context = (ObjectContext)Context;
         }
+
+        public virtual void TransactionCommit()
+        { }
+
+        #endregion
 
         private static Type GetMostBaseEntityType<ET>()
         {
@@ -261,9 +268,6 @@ namespace DataAvail.DataService.Provider
 
         #endregion
 
-        protected virtual void OnTransactionCommited()
-        {
-        }
 
     }
 }

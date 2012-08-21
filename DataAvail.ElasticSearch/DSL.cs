@@ -21,6 +21,7 @@ namespace DataAvail.ElasticSearch
 
         private static TDest Dyn2Typed<TDest>(dynamic Dyn)
         {
+            var r = JsonConvert.SerializeObject(Dyn);
 
             return JsonConvert.DeserializeObject<TDest>(JsonConvert.SerializeObject(Dyn));
 

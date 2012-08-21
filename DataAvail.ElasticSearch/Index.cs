@@ -18,6 +18,16 @@ namespace DataAvail.ElasticSearch
 
         private IProxy _proxy;
 
+
+        public static void Set(string IndexName, string Type, string Key, object Object)
+        {
+            ElasticSearch es = new ElasticSearch();
+
+            var index = es.CreateIndex();
+
+            index.SetIndex(IndexName, Type, Key, Object);
+        }
+
         public void SetIndex<TSrc, TJson>(string IndexName, TSrc Object)
         {
             var idProperty = Object.GetType().GetProperty("Id");
