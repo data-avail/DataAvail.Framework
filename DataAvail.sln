@@ -9,22 +9,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAvail.Web.Auth", "DataA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAvail.Web.Utils", "DataAvail.Web.Utils\DataAvail.Web.Utils.csproj", "{68237CD4-FE00-4622-945D-812B72796EA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAvail.UralAppService", "DataAvail.UralAppService\DataAvail.UralAppService.csproj", "{CD39705C-B40C-4316-B41A-351408E3A9E1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAvail.LinqMapper", "DataAvail.LinqMapper\DataAvail.LinqMapper.csproj", "{FA40084C-24E9-4549-868E-C427CA346177}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAvail.DataService.Provider", "DataAvail.DataService.Provider\DataAvail.DataService.Provider.csproj", "{41D01B92-FBC9-4907-B816-EA9AB1DBDCEF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Microsoft.Data.Services.Toolkit", "Microsoft.WcfDSToolkit\Microsoft.Data.Services.Toolkit.csproj", "{E38FE120-4439-4A23-B6F6-88CB0BE4E493}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAvail.UralAppService.Test", "DataAvail.UralAppService.Test\DataAvail.UralAppService.Test.csproj", "{EB0CDFF8-F87B-4E91-B752-91326B01F1C7}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B9F4AB76-F1BA-4904-9F1A-8ADD994848BD}"
-	ProjectSection(SolutionItems) = preProject
-		DataAvail.vsmdi = DataAvail.vsmdi
-		Local.testsettings = Local.testsettings
-		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{E282B1FE-D7D6-401E-894E-B5849B8ABB51}"
 	ProjectSection(SolutionItems) = preProject
@@ -36,46 +25,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAvail.DataService.Notif
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAvail.ElasticSearch", "DataAvail.ElasticSearch\DataAvail.ElasticSearch.csproj", "{B1C64EC4-8A32-4DD2-BE28-5F56F9D819B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAvail.Mvc.Account", "DataAvail.Mvc.Account\DataAvail.Mvc.Account.csproj", "{D78B1EA5-A81C-4E27-BD09-9D79082FC37D}"
+EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccLocalPath0 = .
-		SccLocalPath1 = DataAvail.DataService.NotifierSocket
-		SccLocalPath10 = Microsoft.WcfDSToolkit
-		SccLocalPath11 = DataAvail.ElasticSearch
-		SccLocalPath2 = DataAvail.DataService.Provider
-		SccLocalPath3 = DataAvail.DataService
-		SccLocalPath4 = DataAvail.LinqMapper
-		SccLocalPath5 = DataAvail.UralAppService.Test
-		SccLocalPath6 = DataAvail.UralAppService
-		SccLocalPath7 = DataAvail.Utils
-		SccLocalPath8 = DataAvail.Web.Auth
-		SccLocalPath9 = DataAvail.Web.Utils
-		SccNumberOfProjects = 12
-		SccProjectName1 = DataAvail.DataService.NotifierSocket
-		SccProjectName10 = Microsoft.WcfDSToolkit
-		SccProjectName11 = DataAvail.ElasticSearch
-		SccProjectName2 = DataAvail.DataService.Provider
-		SccProjectName3 = DataAvail.DataService
-		SccProjectName4 = DataAvail.LinqMapper
-		SccProjectName5 = DataAvail.UralAppService.Test
-		SccProjectName6 = DataAvail.UralAppService
-		SccProjectName7 = DataAvail.Utils
-		SccProjectName8 = DataAvail.Web.Auth
-		SccProjectName9 = DataAvail.Web.Utils
-		SccProjectUniqueName1 = DataAvail.DataService.NotifierSocket\\DataAvail.DataService.NotifierSocket.csproj
-		SccProjectUniqueName10 = Microsoft.WcfDSToolkit\\Microsoft.Data.Services.Toolkit.csproj
-		SccProjectUniqueName11 = DataAvail.ElasticSearch\\DataAvail.ElasticSearch.csproj
-		SccProjectUniqueName2 = DataAvail.DataService.Provider\\DataAvail.DataService.Provider.csproj
-		SccProjectUniqueName3 = DataAvail.DataService\\DataAvail.DataService.csproj
-		SccProjectUniqueName4 = DataAvail.LinqMapper\\DataAvail.LinqMapper.csproj
-		SccProjectUniqueName5 = DataAvail.UralAppService.Test\\DataAvail.UralAppService.Test.csproj
-		SccProjectUniqueName6 = DataAvail.UralAppService\\DataAvail.UralAppService.csproj
-		SccProjectUniqueName7 = DataAvail.Utils\\DataAvail.Utils.csproj
-		SccProjectUniqueName8 = DataAvail.Web.Auth\\DataAvail.Web.Auth.csproj
-		SccProjectUniqueName9 = DataAvail.Web.Utils\\DataAvail.Web.Utils.csproj
-		SccTeamFoundationServer = http://infrared.goip.ru:8080/tfs/defaultcollection
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = DataAvail.vsmdi
 	EndGlobalSection
@@ -121,12 +73,12 @@ Global
 		{B8DB1E34-DB25-4A50-8F0F-A450B8D55F54}.Release|Any CPU.Build.0 = Release|Any CPU
 		{B8DB1E34-DB25-4A50-8F0F-A450B8D55F54}.Staging|Any CPU.ActiveCfg = Release|Any CPU
 		{B8DB1E34-DB25-4A50-8F0F-A450B8D55F54}.Staging|Any CPU.Build.0 = Release|Any CPU
-		{CD39705C-B40C-4316-B41A-351408E3A9E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CD39705C-B40C-4316-B41A-351408E3A9E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CD39705C-B40C-4316-B41A-351408E3A9E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CD39705C-B40C-4316-B41A-351408E3A9E1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{CD39705C-B40C-4316-B41A-351408E3A9E1}.Staging|Any CPU.ActiveCfg = Release|Any CPU
-		{CD39705C-B40C-4316-B41A-351408E3A9E1}.Staging|Any CPU.Build.0 = Release|Any CPU
+		{D78B1EA5-A81C-4E27-BD09-9D79082FC37D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D78B1EA5-A81C-4E27-BD09-9D79082FC37D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D78B1EA5-A81C-4E27-BD09-9D79082FC37D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D78B1EA5-A81C-4E27-BD09-9D79082FC37D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D78B1EA5-A81C-4E27-BD09-9D79082FC37D}.Staging|Any CPU.ActiveCfg = Release|Any CPU
+		{D78B1EA5-A81C-4E27-BD09-9D79082FC37D}.Staging|Any CPU.Build.0 = Release|Any CPU
 		{E1BEB697-D12C-4AAA-A4F6-743F7D635F9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E1BEB697-D12C-4AAA-A4F6-743F7D635F9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E1BEB697-D12C-4AAA-A4F6-743F7D635F9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -139,12 +91,6 @@ Global
 		{E38FE120-4439-4A23-B6F6-88CB0BE4E493}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E38FE120-4439-4A23-B6F6-88CB0BE4E493}.Staging|Any CPU.ActiveCfg = Staging|Any CPU
 		{E38FE120-4439-4A23-B6F6-88CB0BE4E493}.Staging|Any CPU.Build.0 = Staging|Any CPU
-		{EB0CDFF8-F87B-4E91-B752-91326B01F1C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EB0CDFF8-F87B-4E91-B752-91326B01F1C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EB0CDFF8-F87B-4E91-B752-91326B01F1C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EB0CDFF8-F87B-4E91-B752-91326B01F1C7}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EB0CDFF8-F87B-4E91-B752-91326B01F1C7}.Staging|Any CPU.ActiveCfg = Release|Any CPU
-		{EB0CDFF8-F87B-4E91-B752-91326B01F1C7}.Staging|Any CPU.Build.0 = Release|Any CPU
 		{FA40084C-24E9-4549-868E-C427CA346177}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FA40084C-24E9-4549-868E-C427CA346177}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA40084C-24E9-4549-868E-C427CA346177}.Release|Any CPU.ActiveCfg = Release|Any CPU

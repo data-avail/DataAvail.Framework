@@ -79,10 +79,6 @@
       <Project>{FA40084C-24E9-4549-868E-C427CA346177}</Project>
       <Name>DataAvail.LinqMapper</Name>
     </ProjectReference>
-    <ProjectReference Include="..\DataAvail.UralAppService\DataAvail.UralAppService.csproj">
-      <Project>{CD39705C-B40C-4316-B41A-351408E3A9E1}</Project>
-      <Name>DataAvail.UralAppService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Microsoft.WcfDSToolkit\Microsoft.Data.Services.Toolkit.csproj">
       <Project>{E38FE120-4439-4A23-B6F6-88CB0BE4E493}</Project>
       <Name>Microsoft.Data.Services.Toolkit</Name>
