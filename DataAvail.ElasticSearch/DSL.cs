@@ -82,11 +82,12 @@ namespace DataAvail.ElasticSearch
                             {
                                 var s = ((JArray)p.src[prop.Key])[i];
 
-                                var propVal = prop.Value.First.Value<string>();
-
-                                if (s.Value<string>() == GetUndecoratedHilight(propVal))
+                                foreach (var propVal in prop.Value.Select(x => x.Value<string>()))
                                 {
-                                    ((JArray)p.src[prop.Key])[i] = propVal;
+                                    if (s.Value<string>() == GetUndecoratedHilight(propVal))
+                                    {
+                                        ((JArray)p.src[prop.Key])[i] = propVal;
+                                    }
                                 }
                             }
                         }
@@ -108,7 +109,7 @@ namespace DataAvail.ElasticSearch
 
                     if (idProp != null)
                     {
-                        idProp.SetValue(res, System.ComponentModel.TypeDescriptor.GetConverter(idProp.PropertyType).ConvertFromString(p.id));
+                        idProp.SetValue(res, System.ComponentModel.TypeDescriptor.GetConverter(idProp.PropertyType).ConvertFromString(p.id), null);
                     }
 
                 }

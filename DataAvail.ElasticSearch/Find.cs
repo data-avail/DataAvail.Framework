@@ -66,7 +66,7 @@ namespace DataAvail.ElasticSearch
 
             var dsl = es.CreateDSL();
 
-            string queryTerm = string.Join(" AND ", Term.Select(p => string.Format("*{0}*", p)));
+            string queryTerm = string.Join(" AND ", Term.Select(p => string.Format("(*{0}* OR {0}~0.7)", p)));
 
             var search = new
             {
@@ -76,10 +76,31 @@ namespace DataAvail.ElasticSearch
                         @bool =
                             new
                             {
-                                must =
-                                    new[] { new { query_string = new { fields = Fields, query = queryTerm } } }
+                                should =
+                                    new [] { new { query_string = new { fields = Fields, query = queryTerm } } }
                             }
                     }
+            };
+
+            return dsl.Query<T>(Index, Type, search, Highlight);
+
+        }
+
+
+        public static IEnumerable<T> Fuzzy<T>(string Index, string Type, string[] Fields, string[] Term, bool Highlight = true)
+        {
+            DataAvail.ElasticSearch.ElasticSearch es = new DataAvail.ElasticSearch.ElasticSearch();
+
+            var dsl = es.CreateDSL();
+
+            string queryTerm = string.Join(" AND ", Term.Select(p => string.Format("*{0}*", p)));
+
+            var search = new
+            {
+                query = new
+                {
+                    fuzzy = new { _all = queryTerm }
+                }
             };
 
             return dsl.Query<T>(Index, Type, search, Highlight);

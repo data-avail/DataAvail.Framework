@@ -28,6 +28,16 @@ namespace DataAvail.ElasticSearch
             index.SetIndex(IndexName, Type, Key, Object);
         }
 
+        public static void Delete(string IndexName, string Type, string Key)
+        {
+            ElasticSearch es = new ElasticSearch();
+
+            var index = es.CreateIndex();
+
+            index.DeleteIndex(IndexName, Type, Key);
+        }
+
+
         public void SetIndex<TSrc, TJson>(string IndexName, TSrc Object)
         {
             var idProperty = Object.GetType().GetProperty("Id");
@@ -36,7 +46,7 @@ namespace DataAvail.ElasticSearch
 
             var dest = AutoMapper.Mapper.Map<TJson>(Object);
 
-            var key = idProperty.GetValue(Object);
+            var key = idProperty.GetValue(Object, null);
 
             var type = Object.GetType().Name.ToLower();
 
@@ -60,6 +70,11 @@ namespace DataAvail.ElasticSearch
             {
                 _proxy.Request(string.Format("{0}/{1}/{2}", IndexName, Type, kvp.Key), "POST", kvp.Value);
             }
+        }
+
+        public void DeleteIndex(string IndexName, string Type, string Key)
+        {
+            _proxy.Request(string.Format("{0}/{1}/{2}", IndexName, Type, Key), "DELETE", string.Empty);
         }
 
     }

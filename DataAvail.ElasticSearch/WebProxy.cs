@@ -10,7 +10,7 @@ namespace DataAvail.ElasticSearch
     public class WebProxy : IProxy
     {
         public WebProxy()
-            : this("http://localhost:9200")
+            : this(Host)
         {
         }
 
@@ -18,6 +18,8 @@ namespace DataAvail.ElasticSearch
         {
             this._baseUrl = BaseUrl;
         }
+
+        public static string Host = "http://localhost:9200";
 
         private string _baseUrl;
 

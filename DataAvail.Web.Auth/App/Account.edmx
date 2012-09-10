@@ -1,13 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="DataAvail.DataHub.AccountsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="DataAvail.DataHub.AccountsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityContainer Name="DataAvailDataHubAccountsModelStoreContainer">
-          <EntitySet Name="UserApplications" EntityType="DataAvail.DataHub.AccountsModel.Store.UserApplications" store:Type="Tables" Schema="dbo" />
-          <EntitySet Name="Users" EntityType="DataAvail.DataHub.AccountsModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UserApplications" EntityType="DataAvail.DataHub.AccountsModel.Store.UserApplications" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Users" EntityType="DataAvail.DataHub.AccountsModel.Store.Users" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
           <AssociationSet Name="FK_Users_UserApplications" Association="DataAvail.DataHub.AccountsModel.Store.FK_Users_UserApplications">
             <End Role="UserApplications" EntitySet="UserApplications" />
             <End Role="Users" EntitySet="Users" />
@@ -47,8 +47,8 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="DataAvail.DataHub.AccountsModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
-        <EntityContainer Name="AccountEntities" annotation:LazyLoadingEnabled="true">
+      <Schema Namespace="DataAvail.DataHub.AccountsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="AccountEntities" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
           <EntitySet Name="UserApplications" EntityType="DataAvail.DataHub.AccountsModel.UserApplication" />
           <EntitySet Name="Users" EntityType="DataAvail.DataHub.AccountsModel.User" />
           <AssociationSet Name="FK_Users_UserApplications" Association="DataAvail.DataHub.AccountsModel.FK_Users_UserApplications">
@@ -62,7 +62,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="true" FixedLength="false" />
-          <Property Name="Created" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" />
+          <Property Name="Created" Type="DateTime" Nullable="false" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <NavigationProperty Name="Users" Relationship="DataAvail.DataHub.AccountsModel.FK_Users_UserApplications" FromRole="UserApplications" ToRole="Users" />
         </EntityType>
         <EntityType Name="User">
@@ -93,7 +93,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="DataAvailDataHubAccountsModelStoreContainer" CdmEntityContainer="AccountEntities">
           <EntitySetMapping Name="UserApplications"><EntityTypeMapping TypeName="DataAvail.DataHub.AccountsModel.UserApplication"><MappingFragment StoreEntitySet="UserApplications">
             <ScalarProperty Name="Id" ColumnName="Id" />
@@ -113,7 +113,7 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
