@@ -1,5 +1,6 @@
 (function() {
   var OAuthPopUp, VKAuth;
+
   $(document).ready(function() {
     var item, linkPhrase, links;
     console.log("ready");
@@ -52,6 +53,7 @@
       });
     }), 1000);
   });
+
   OAuthPopUp = function(url, width, height) {
     var h, l, t, w;
     if (navigator.userAgent.toLowerCase().indexOf("opera") !== -1) {
@@ -66,6 +68,7 @@
     url += "&extWindow=true";
     return window.open(url, "", "status=no,scrollbars=yes,resizable=yes,width=" + width + ",height=" + height + ",top=" + t + ",left=" + l);
   };
+
   VKAuth = function(response) {
     var data;
     if (response.session) {
@@ -78,4 +81,5 @@
       });
     }
   };
+
 }).call(this);

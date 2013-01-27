@@ -50,6 +50,7 @@ OAuthPopUp = (url, width, height) ->
 	l = Math.floor (w - width)/2-5
 	url += "&extWindow=true"
 	window.open url, "", "status=no,scrollbars=yes,resizable=yes,width=#{width},height=#{height},top=#{t},left=#{l}"
+	#window.showModalDialog url, window, "status=no,scrollbars=yes,resizable=yes,width=#{width},height=#{height},top=#{t},left=#{l}"
 
 VKAuth = (response) ->
     if (response.session) 

@@ -71,7 +71,6 @@
     <Content Include="nuget\lib\net40\DotNetOpenAuth.ApplicationBlock.dll" />
     <Content Include="nuget\lib\net40\DotNetOpenAuth.dll" />
     <None Include="da.openid.coffee">
-      <Generator>CoffeeScriptGenerator</Generator>
       <LastGenOutput>da.openid.js</LastGenOutput>
     </None>
     <None Include="nuget\content\AccountProfile.cs.pp" />

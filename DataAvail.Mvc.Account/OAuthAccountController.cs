@@ -83,26 +83,37 @@ namespace DataAvail.Mvc.Account
         {
             string js = null;
 
-            if (string.IsNullOrEmpty(ReturnUrl))
+            if (Request.Browser.Browser != "IE")
             {
-                js = "window.opener.location.href = window.opener.location.href";
-            }
-            else 
-            {
-                ReturnUrl = ReturnUrl.Replace("$user", UserName);
-                if (ReturnUrl.StartsWith("#"))
-                {
-                    //hasher
-                    ReturnUrl = ReturnUrl.Remove(0, 1);
-                    js = string.Format("window.opener.location.hash = '{0}'", ReturnUrl);
-                }
-                else
-                {
-                    js = string.Format("window.opener.location.href = '{0}'", ReturnUrl);
-                }
-            }
+                var opener = "opener";
 
-            return Content(string.Format("<!HTML><header></header><dody><script>{0}; window.close();</script></body>", js), "text/html");
+                if (string.IsNullOrEmpty(ReturnUrl))
+                {
+                
+                    //js = "window.opener.location.href = window.opener.location.href";
+                    js = string.Format("window.{0}.location.href = window.{0}.location.href", opener);
+                }
+                else 
+                {
+                    ReturnUrl = ReturnUrl.Replace("$user", UserName);
+                    if (ReturnUrl.StartsWith("#"))
+                    {
+                        //hasher
+                        ReturnUrl = ReturnUrl.Remove(0, 1);
+                        js = string.Format("window.{1}.location.hash = '{0}'", ReturnUrl, opener);
+                    }
+                    else
+                    {
+                        js = string.Format("window.{1}.location.href = '{0}'", ReturnUrl, opener);
+                    }
+                }
+            }
+            else
+            {
+                js = "alert('This Internet Explorer and you need refresh you page manually in order to see that you actually logined. Next time, try to use better browser ;)');";
+            }
+            
+            return Content(string.Format("<!HTML><header><script type='text/javascript'>{0}; window.close();</script></header><body></body>", js), "text/html");
         }
 
         private ActionResult GetSuccessResult(OAuthServiceType ServiceType, string UserName, string ReturnUrl)
