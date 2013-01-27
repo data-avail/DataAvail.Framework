@@ -7,6 +7,9 @@ using Microsoft.Data.Services.Toolkit.QueryModel;
 using System.Reflection;
 using System.Data.Objects;
 using System.Web;
+using Ninject;
+using DataAvail.DataService.Provider.RequestProvider;
+using DataAvail.DataService.Provider.Modules;
 
 namespace DataAvail.DataService.Provider
 {
@@ -27,7 +30,7 @@ namespace DataAvail.DataService.Provider
         {
             _assembly = Assembly ?? Assembly.GetAssembly(this.GetType());
             _repositoryTypeTemplate = RepositoryTypeTemplate;
-            SetContext(Context);
+            SetContext(Context);          
         }
 
         private object _context;
@@ -66,19 +69,10 @@ namespace DataAvail.DataService.Provider
             }
         }
 
+
         public static string GetQueryStringParam(string ParamName)
         {
-            if (HttpContext.Current != null)
-            {
-                var queryString = HttpContext.Current.Request.QueryString;
-
-                if (queryString[ParamName] != null)
-                {
-                    return queryString[ParamName];
-                }
-            }
-
-            return null;
+            return RequestProviderManager.RequestProvider.GetQueryStringParam(ParamName);
         }
 
         public override object RepositoryFor(string fullTypeName)

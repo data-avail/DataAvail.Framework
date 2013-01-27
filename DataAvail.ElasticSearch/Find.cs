@@ -8,6 +8,7 @@ namespace DataAvail.ElasticSearch
 {
     public static class Find
     {
+        /*
         public static IEnumerable<T> Like<T>(string Index, string Type, string Term, bool Highlight = true)
         {
             DataAvail.ElasticSearch.ElasticSearch es = new DataAvail.ElasticSearch.ElasticSearch();
@@ -106,7 +107,7 @@ namespace DataAvail.ElasticSearch
             return dsl.Query<T>(Index, Type, search, Highlight);
 
         }
-
+         */
 
     }
 }

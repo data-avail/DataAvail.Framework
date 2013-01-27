@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-
 namespace DataAvail.ElasticSearch
 {
     public class Index
@@ -75,6 +74,51 @@ namespace DataAvail.ElasticSearch
         public void DeleteIndex(string IndexName, string Type, string Key)
         {
             _proxy.Request(string.Format("{0}/{1}/{2}", IndexName, Type, Key), "DELETE", string.Empty);
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="IndexName"></param>
+        /// <param name="Type"></param>
+        /// <param name="Object"></param>
+        /// <param name="Immediate">See http://www.elasticsearch.org/guide/reference/api/index_.html refresh option</param>
+        /// <returns></returns>
+        public string SetIndex(string IndexName, string Type, object Object, bool Immediate = true)
+        {
+            var jsonStr = JsonConvert.SerializeObject(Object);
+
+            var res = _proxy.Request(string.Format("{0}/{1}", IndexName, Type), "POST", jsonStr);
+
+            dynamic jsonRes = JsonConvert.DeserializeObject(res);
+
+            if (!(bool)jsonRes.ok)
+            {
+                throw new Exception(res);
+            }
+
+            if (res != null)
+            {
+                var idProp = Object.GetType().GetProperty("Id");
+
+                if (idProp == null)
+                    idProp = Object.GetType().GetProperty("id");
+
+                if (idProp == null)
+                    idProp = Object.GetType().GetProperty("_id");
+
+                if (idProp != null)
+                {
+                    idProp.SetValue(Object, (string)jsonRes._id, null);
+                }
+            }
+
+            return res;
+        }
+
+        public void Flush(string IndexName)
+        {
+            _proxy.Request(string.Format("{0}/_flush", IndexName), "POST", null); 
         }
 
     }

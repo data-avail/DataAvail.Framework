@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using DataAvail.ElasticSearch;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System.Text.RegularExpressions;
 
 namespace DataAvail.ElasticSearch
 {
@@ -27,6 +28,7 @@ namespace DataAvail.ElasticSearch
 
         }
 
+        /*
         private static dynamic GetQueryHighlight<T>()
         {
 
@@ -107,6 +109,9 @@ namespace DataAvail.ElasticSearch
                     if (idProp == null)
                         idProp = typeof(T).GetProperty("id");
 
+                    if (idProp == null)
+                        idProp = typeof(T).GetProperty("_id");
+
                     if (idProp != null)
                     {
                         idProp.SetValue(res, System.ComponentModel.TypeDescriptor.GetConverter(idProp.PropertyType).ConvertFromString(p.id), null);
@@ -137,11 +142,60 @@ namespace DataAvail.ElasticSearch
 
             return JsonConvert.DeserializeObject<dynamic>(res);
         }
+         */
 
         public string Query(string IndexName, string TypeName, string Filter)
         {
             return _proxy.Request(string.Format("{0}/{1}/_search", IndexName, TypeName), "POST", Filter);
         }
 
+        public Dictionary<T, int> Facet<T>(string IndexName, string TypeName, object QueryObj, string FacetField, T MissedValKey)
+        {
+            var facetQuery = new
+            {
+                size = 0,
+                query = QueryObj,
+                facets = new {facet_name = new { terms = new { field = FacetField, size = 100} }}
+            };
+
+            var filterStr = JsonConvert.SerializeObject(facetQuery);
+
+            var res = Query(IndexName, TypeName, filterStr);
+
+            var jsonRes = JsonConvert.DeserializeObject<dynamic>(res);
+
+            var dict = ((JArray)jsonRes.facets.facet_name.terms).ToDictionary(k => (T)((dynamic)k).term, v => (int)((dynamic)v).count);
+
+            if ((int)jsonRes.facets.facet_name.missing != 0)
+            {
+                dict.Add(MissedValKey, (int)jsonRes.facets.facet_name.missing);
+            }
+
+            return dict;
+        }
+
+        public IEnumerable<dynamic> Query(string Index, string TypeName, dynamic QueryObject, int MaxCount = 500)
+        {
+            var query = new
+            {
+                size = MaxCount,
+                query = QueryObject
+            };
+
+            var queryStr = SanitarizeQueryString(JsonConvert.SerializeObject(query));
+
+            var res = Query(Index, TypeName, queryStr);
+
+            var jsonRes = JsonConvert.DeserializeObject<dynamic>(res);
+
+            return (JArray)jsonRes.hits.hits;
+        }
+
+        private static string SanitarizeQueryString(string String)
+        { 
+            var regex = new Regex("must_\\d");
+
+            return regex.Replace(String, "must");
+        }
     }
 }
